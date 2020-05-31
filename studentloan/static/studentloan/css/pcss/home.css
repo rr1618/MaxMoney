@@ -1,0 +1,50 @@
+@import url(_variable.css);
+.text-shadow1 {
+    text-shadow: .1em .1em .2em rgba(0, 0, 0, 0.6);
+  }
+  .img-fluid{
+    clip-path: circle(35%);
+    object-fit: object-fit  ;
+
+}
+.register{
+  z-index: -1;
+
+}
+.register .SignUpForm{
+  background: var(--gradient-color);
+  font-family: var(--roboto);
+}
+h1{
+  margin: 30px 0px;
+  font-family: var(--h1-font);
+}
+.register .SignUpForm p{
+  font-size: 28px;
+  font-family: var(--card-p);
+}
+#registerForm .card-header{
+  font-family: var(--roboto);
+  background: var(--gradient-color);
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 240px;
+}
+.modal-header{
+  background: var(--gradient-color);
+  color: aliceblue;
+}
+.blue-card h5{
+  font-family: 'Dosis', sans-serif;
+}
+
+span{
+  padding: 0px 10px;
+}
+@media screen and (max-width: 540px){
+  .blue-card h5{
+    font-size: 1rem;
+  }
+  .blue-card span{
+    font-size: .8rem;
+  }
+}

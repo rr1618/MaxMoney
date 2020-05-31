@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+{% load static %}
+{% load socialaccount %}
+{% providers_media_js %}
+{% load widget_tweaks %}
+  <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>MaxMoney</title>
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Advent+Pro|Baloo+Chettan+2|Bellota+Text|Comfortaa|Dosis|Fjalla+One|Open+Sans+Condensed:300|Raleway|Righteous&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+        <link href="{% static 'studentloan/css/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="{% static 'studentloan/css/mdb.min.css' %}" rel="stylesheet">
+        <link href="{% static 'studentloan/css/pcss/layout.css' %}" rel="stylesheet">
+        <script src="{% static 'studentloan/js/jquery.min.js' %}" type="text/javascript"></script>
+    </head>
+    <body>
+        <header class="navigation">
+          <!-- ============================Top Navigation Fixed ====================================== -->
+            <div class="main-menu">
+              <nav class="fixed-top navbar navbar-expand-lg navbar-light">
+                <div class="sidenavHamburger" >
+                  <input id="hamburger" class="hamburger" type="checkbox" />
+                  <label for="hamburger" class="fas fa-bars fa-2x" style="width: 1.5rem;"></label>
+                </div>
+                
+                <a class="navbar-brand" href="/studentloan/">MaxMoney</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                  <div class="mr-auto"></div>
+                  <ul class="navbar-nav">
+                    <li class="nav-item">
+                      <a class="nav-link" href="/studentloan/" >Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    {% if not user.is_authenticated %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="#" data-toggle="modal" data-target="#modalLoginForm">Login</a>
+                    </li>
+                    {% endif %}
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                      <a  class="nav-link"href="/studentloan/dashboard/" >Profile</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">Settings</a>
+                      <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                        <a class="dropdown-item" href="#">Edit Details</a>
+                        <a class="dropdown-item" href="/studentloan/logout">Logout<i class="ml-1 fas fa-power-off"></i></a>
+                        <a class="dropdown-item" href="#">About Us</a>
+                      </div>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                      <a class="nav-link" href="/studentloan/contact/" >Contact Us</a>
+                    </li>
+                  </ul>
+                </div>
+            </nav>
+            </div>
+          <!-- ============================Top Navigation Fixed/ ====================================== -->
+
+          <!-- ============================Side Navigation Fixed ====================================== -->  
+          <div class="secondary-menu z-depth-2">
+            
+            <div class="sidenav">
+              <ul class="sidelist">
+                {% if user.is_authenticated %}
+                <li>
+                  <a href="/studentloan/"><i class="fas fa-user fa-2x"></i>Welcome{{user}}</a>
+                </li>
+                <li>
+                  <img src="{{details.selfie.url}}" class="img-thumbnail z-depth-2" width="200" height="100" >
+                </li>
+                {% endif %}
+                <li>
+                  <a href="/studentloan/dashboard/?name=bankAccount"><i class="fas fa-university fa-2x"></i> AddBank</a>
+                </li>
+                <li>
+                  <a href="/studentloan/dashboard/?name=lendForm"><i class="fas fa-donate fa-2x"></i>Lend Money</a>
+                </li>
+                <li>
+                  <a href="/studentloan/dashboard/?name=borrowForm"><i class="fas fa-hand-holding-usd fa-2x"></i>Borrow Money</a>
+                </li>
+                <li>
+                  <a href="/studentloan/dashboard/?name=transactionTable"><i class="fas fa-file-invoice-dollar fa-2x"></i>Transactions</a>
+                </li>
+
+              
+              </ul>
+            </div>
+          </div>
+          <!-- ============================Side Navigation Fixed/ ====================================== -->  
+        </header>
+        {% block content %}
+        {% endblock %}
+        
+          <footer class="page-footer" style="background-color: #2E2E2E;">
+            <div class="row">
+              <div class="mx-auto">
+                <h5 class="white-text">MaxMoney</h5>
+              </div>
+              
+            </div>
+
+          </footer>
+ 
+        
+        <script src="{% static 'studentloan/js/popper.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'studentloan/js/bootstrap.min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'studentloan/js/mdb.min.js' %}" type="text/javascript"></script>
+        <script type="text/javascript" src="/static/studentloan/js/pjs/webcam/webcam.min.js"></script>
+        <script src="{% static 'studentloan/js/pjs/layout.js' %}" type="text/javascript"></script>
+        <script src="{% static 'studentloan/js/pjs/signup.js' %}" type="text/javascript"></script>
+        
+    </body>
+    </html>

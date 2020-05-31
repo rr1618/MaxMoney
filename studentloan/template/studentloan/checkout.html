@@ -1,0 +1,24 @@
+{% extends 'studentloan/layout.html' %}
+{% load socialaccount %}
+{% providers_media_js %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="forTopMargin">
+    <h1></h1>
+  </div>
+<div class="mx-auto col-12 col-lg-8 z-depth-2 ">
+     <form action="/studentloan/paynow/" method="POST">
+        {% csrf_token %}
+        <h4 class="mx-auto"><strong> Paying To</strong> </h4>
+        <input type="text" name="order_id" id="" value="{{checkout_dict.order_id}}" class="form-control" readonly>
+        <h4>Amount of </h4>
+        <input type="text" name="amt" id="" value="{{checkout_dict.amount}}" class="form-control" readonly>
+        <h4>For a Period Of </h4>
+        <input type="text" name="" id="" value="{{checkout_dict.borrow_month}}" class="form-control" readonly>
+        <h4>With an expected return of</h4>
+        <input type="text" name="" id="" value="{{checkout_dict.exp_return}}" class="form-control" readonly>        
+        <button class="btn btn-primary" type="submit">Proceed to Pay</button>
+    </form>
+</div>
+{% endblock%}

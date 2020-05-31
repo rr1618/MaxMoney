@@ -1,0 +1,149 @@
+{% extends 'studentloan/layout.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content%}
+<script src="{% static 'studentloan/js/pjs/dashboard.js' %}"
+    type="text/javascript"></script>
+    <script src="{% static 'studentloan/js/pjs/jquery.tablesorter.min.js' %}"
+    type="text/javascript"></script>
+    <script src="{% static 'studentloan/js/pjs/jquery.tablesorter.widgets.min.js' %}"
+    type="text/javascript"></script>
+    <link href="{% static 'studentloan/css/pcss/dashboard.css' %}"
+    rel="stylesheet">
+    <link href="{% static 'studentloan/css/pcss/theme.default.css' %}"
+    rel="stylesheet">
+
+
+  <!-- Bank Form -->
+  <div class="p-5 m-5 m-lg-auto col-10">
+    <div class="addBank row" id="bankAccount" style="display: none;">
+      <div class="col-md-5 col-sm-5">
+        <form action="/studentloan/dashboard/addbank/"  method="POST"  >
+          {% csrf_token %}
+          <div class="md-form">
+            {% render_field bankForm.acc_hol_name %}
+            <label for="acc_hol_name">Account Holder Name</label>
+          </div>
+          <div class="md-form">
+            {% render_field bankForm.acc_no %}
+            <label for="acc_no">Accout No</label>
+            <!-- {{bankForm.acc_no}} -->
+          </div>
+          <div class="md-form mb-3">
+            {% render_field bankForm.ifsc %}
+            <label for="ifsc">IFSC code</label>
+            <!-- {{bankForm.ifsc}} -->
+          </div>
+          <div class="md-form mb-3">
+            <span class="mr-3 text-dark" for="bank">Select Bank</span>
+            
+            {% render_field bankForm.bank_name class="browser-default custom-select" %}
+            <!-- {{bankForm.bank_name|add_class:"browser-default custom-select"}} -->
+          </div>
+      
+          <button type="submit" class="float-right   btn btn-success btn-sm">Add Account</button>
+          <br>
+          </form>
+      </div>
+          <div class="col-md-5 p-5 col-sm-5" >
+            {% for i in banks %}
+            <div class="row">
+            <div class="addedBanks mb-1 col ">
+              <h6><strong>{{i.bank_name}}</strong></h6>
+              <span>Account Number</span><h6>{{i.acc_no}}</h6>
+            </div>
+            <div class="col-1">
+              <a href=""><i class="fas fa-edit"></i></a>
+              
+            </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+  
+        </div>
+      </div>  
+
+  
+    <!-- Bank Form -->
+
+    <div class="p-5 m-4 m-lg-auto  col-sm-4 col-lg-6" >
+
+
+    <!-- Borrow Form -->
+    <form action="/studentloan/dashboard/borrow/" style="display: none;" method="POST" id="borrowForm">
+      {% csrf_token %}
+      <div class="mt-5 row">
+  <label class="ml-2 text-dark"><input  type="radio" name="optradio" checked>Post a Loan Request </label>
+  
+  <label  class="ml-2 text-dark"><input type="radio" name="optradio">Take Loan From Us</label>
+      </div>
+  
+      <label class="text-dark" for="money">Select Amount To Borrow</label>
+        {% render_field borrowForm.borrow_amt class="browser-default custom-select" %}
+    
+    <label class="text-dark" for="time">For</label>
+    {% render_field borrowForm.borrow_month class="browser-default custom-select" %}
+    <hr>
+    <div class=" ml-5 row">
+      <p class="text-dark" >You Will Pay</p>
+      <h5 class=" ml-3 text-primary" id="pay"></h5>
+    </div>
+      <button type="submit" class="btn btn-primary">Post</button><br>
+    </form>
+
+    <!-- Borrow Form -->
+
+    <!-- Lend Form -->
+    <form method="POST" action="/studentloan/payment/" id="lendForm" style="display: none;">
+      {% csrf_token %}
+      <label for="money">Select Amount To Lend</label>
+        {{paymentFrom.amount|add_class:"browser-default custom-select"}}
+    <label for="time">Select Time To Lend</label>
+        {{paymentFrom.time|add_class:"browser-default custom-select"}}
+      <hr>
+      <button type="submit" class="btn btn-danger">Proceed To Pay</button>
+    </form>
+    <!-- Lend Form -->
+</div>
+
+
+<script>
+	$(function(){
+		$('table').tablesorter({
+			widgets        : ['zebra', 'columns'],
+			usNumberFormat : false,
+			sortReset      : true,
+			sortRestart    : true
+		});
+  });
+  $(document).ready(function(){
+    $("#{{form_to_render}}").show();
+  });
+	</script>
+<!-- Table with panel -->
+<table class="m-auto col-5 tablesorter" id="transactionTable" style="display: none;">
+  <thead>
+    <tr>
+      <th>AlphaNumeric Sort</th>
+      <th>Currency</th>
+      <th>Alphabetical</th>
+      <th>Sites</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>abc 123</td><td>&#163;10,40</td><td>Koala</td><td>http://www.google.com</td></tr>
+    <tr><td>abc 1</td><td>&#163;234,10</td><td>Ox</td><td>http://www.yahoo.com</td></tr>
+    <tr><td>abc 9</td><td>&#163;10,33</td><td>Girafee</td><td>http://www.facebook.com</td></tr>
+    <tr><td>zyx 24</td><td>&#163;10</td><td>Bison</td><td>http://www.whitehouse.gov/</td></tr>
+    <tr><td>abc 11</td><td>&#163;3,20</td><td>Chimp</td><td>http://www.ucla.edu/</td></tr>
+    <tr><td>abc 2</td><td>&#163;56,10</td><td>Elephant</td><td>http://www.wikipedia.org/</td></tr>
+    <tr><td>abc 9</td><td>&#163;3,20</td><td>Lion</td><td>http://www.nytimes.com/</td></tr>
+    <tr><td>ABC 10</td><td>&#163;87,00</td><td>Zebra</td><td>http://www.google.com</td></tr>
+    <tr><td>zyx 1</td><td>&#163;99,90</td><td>Koala</td><td>http://www.mit.edu/</td></tr>
+    <tr><td>zyx 12</td><td>&#163;234,10</td><td>Llama</td><td>http://www.nasa.gov/</td></tr>
+  </tbody>
+</table>
+
+
+{% endblock %}

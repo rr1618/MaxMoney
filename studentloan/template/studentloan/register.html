@@ -1,0 +1,128 @@
+{% extends 'studentloan/layout.html' %}
+{% block content%}
+<form method="post" action="" enctype="multipart/form-data" id="basic_form">
+    {% csrf_token %}
+    <div class="row">
+        <div class="mx-3 col-lg-4" id="part1">
+            <div class="form-group">
+                {{forms.fullName}}
+            </div>
+            <div class="form-group">
+                {{forms.email}}
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"
+                        id="basic-addon1">@</spsan>
+                </div>
+                {{forms.username}}<div id="check"></div>
+                {% if messages %}
+
+                    {% for message in messages %}
+                    <label {% if message.tags %} class="{{ message.tags }} text-danger"{% endif %}>{{ message }}</label>
+                    {% endfor %}
+                {% endif %}
+
+
+            </div>
+
+            <div class="form-group">
+                <label for="mobileNumber"></label>
+                {{forms.mobileNumber}}
+            </div>
+            <div class="form-group">
+                {{forms.password}}
+            </div>
+            <div class="pan">
+                <div class="form-group">
+                    <label for="panCardNo"></label>
+                    {{forms.panCardNo}}
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    {{forms.frontPan}}
+                                    <label
+                                        class="custom-file-label"
+                                        for="inputGroupFile01">Front
+                                        Pan</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    {{forms.backPan}} <label
+                                        class="custom-file-label"
+                                        for="inputGroupFile01">Back
+                                        Pan</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="aadhar">
+                <div class="form-group">
+                    <label for="panCardNo"></label>
+                    {{forms.aadharCardNo}}
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    {{forms.frontAadhar}}
+                                    <label
+                                        class="custom-file-label"
+                                        for="inputGroupFile01">Front
+                                        Aadhar</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    {{forms.backAadhar}} <label
+                                        class="custom-file-label"
+                                        for="inputGroupFile01">Back
+                                        Aadhar</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <button type="submit" id="moveNext" class="btn
+                btn-primary float-right">Proceed To next Step</button>
+        </div>
+              </div>
+        </form>
+        <form method="GET" action="selfie/" enctype="multipart/form-data" id="selfieForm" style="display: none;">
+            <div class="col-lg-4" id="part2" style="display:none">
+                <div id="my_camera" style="display: none"></div>
+                <input type="button" id="open_camera" class="btn
+                    btn-warning btn-sm" value="Take Selfie"
+                    onClick="open_webcam()">
+
+                <div id="results"></div>
+                <input type="button" id="capture" class="btn
+                    btn-success btn-sm" value="Capture"
+                    onClick="take_snapshot()" style="display: none"
+                    required>
+
+
+                <div class="my-10px checkbox disabled">
+                    <label style="margin-top: 35px;"><input
+                            type="checkbox" value="" required>I have
+                        read and agree to all terms and conditions</label>
+                </div>
+                <button class="btn btn-primary" type="submit"
+                    value="Submit" id="submit">Submit</button>
+            </div>
+        </form>
+        {% endblock %}
