@@ -6,5 +6,5 @@ Just go Into the folder MaxMoney and run the following commands
 2. python manage.py migrate
 3. python manage.py runserver
 
-now open http://127.0.0.1:8000/studenloan/ in the browser.
+now open http://127.0.0.1:8000/studentloan/ in the browser.
 
